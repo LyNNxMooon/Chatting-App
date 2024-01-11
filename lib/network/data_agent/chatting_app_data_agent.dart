@@ -1,3 +1,4 @@
+import 'package:chatting_app/data/vos/user_vo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class ChattingAppDataAgent {
@@ -7,4 +8,6 @@ abstract class ChattingAppDataAgent {
   Future<void> singOut();
 
   Future<UserCredential> singUpUser(String email, String password);
+
+  Stream<List<UserVO>?> getUserListStream();
 }
