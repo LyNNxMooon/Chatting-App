@@ -77,11 +77,7 @@ class RegisterPage extends StatelessWidget {
                           bloc.setUserEmail = _emailController.text;
                           bloc.setUserPassword = _passwordController.text;
                           await bloc.singUpUser();
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => AuthPage(),
-                              ));
+                          context.navigateWithReplacement(AuthPage());
                         } catch (e) {
                           ScaffoldMessenger.of(buttonContext).showSnackBar(
                               SnackBar(content: Text(e.toString())));
