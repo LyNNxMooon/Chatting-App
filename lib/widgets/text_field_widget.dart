@@ -25,7 +25,7 @@ class TextFieldWidget extends StatelessWidget {
               borderSide: BorderSide(color: kComponentColor)),
           fillColor: kTextFieldsFillColor,
           filled: true,
-          hintStyle: const TextStyle(color: kPrimaryColor)),
+          hintStyle: const TextStyle(color: kComponentColor)),
     );
   }
 }

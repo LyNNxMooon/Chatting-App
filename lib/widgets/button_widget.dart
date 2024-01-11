@@ -15,13 +15,13 @@ class ButtonWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(kSP20x),
         decoration: const BoxDecoration(
-            color: kComponentColor,
+            color: kSecondaryColor,
             borderRadius: BorderRadius.all(Radius.circular(kSP10x))),
         child: Center(
           child: Text(
             text,
             style: const TextStyle(
-                color: kPrimaryColor, fontWeight: FontWeight.bold),
+                color: kComponentColor, fontWeight: FontWeight.bold),
           ),
         ),
       ),
