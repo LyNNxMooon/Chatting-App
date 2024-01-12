@@ -20,10 +20,6 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
       UserCredential userCredential = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
 
-      _firebaseFirestore.collection('users').doc(userCredential.user!.uid).set(
-          {'uid': userCredential.user!.uid, 'email': email},
-          SetOptions(merge: true));
-
       return userCredential;
     } on FirebaseAuthException catch (e) {
       throw Exception(e.code);
@@ -36,13 +32,14 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
   }
 
   @override
-  Future<UserCredential> singUpUser(String email, String password) async {
+  Future<UserCredential> singUpUser(
+      String email, String password, String name) async {
     try {
       UserCredential userCredential = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
 
       _firebaseFirestore.collection('users').doc(userCredential.user!.uid).set(
-          {'uid': userCredential.user!.uid, 'email': email},
+          {'uid': userCredential.user!.uid, 'email': email, 'name': name},
           SetOptions(merge: true));
 
       return userCredential;

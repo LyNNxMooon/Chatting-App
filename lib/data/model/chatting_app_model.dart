@@ -16,8 +16,9 @@ class ChattingAppModel {
 
   Future<void> singOut() => _chattingAppDataAgent.singOut();
 
-  Future<UserCredential> singUpUser(String email, String password) =>
-      _chattingAppDataAgent.singUpUser(email, password);
+  Future<UserCredential> singUpUser(
+          String email, String password, String name) =>
+      _chattingAppDataAgent.singUpUser(email, password, name);
 
   Stream<List<UserVO>?> getUserListStream() =>
       _chattingAppDataAgent.getUserListStream();

@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class RegisterPageBloc extends BaseBloc {
   String userEmail = '';
   String userPassword = '';
+  String userName = '';
 
   set setUserEmail(String email) {
     userEmail = email;
@@ -16,8 +17,13 @@ class RegisterPageBloc extends BaseBloc {
     notifyListeners();
   }
 
+  set setUserName(String name) {
+    userName = name;
+    notifyListeners();
+  }
+
   final ChattingAppModel _chattingAppModel = ChattingAppModel();
 
   Future<UserCredential> singUpUser() =>
-      _chattingAppModel.singUpUser(userEmail, userPassword);
+      _chattingAppModel.singUpUser(userEmail, userPassword, userName);
 }

@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
 
+  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
@@ -48,6 +49,11 @@ class RegisterPage extends StatelessWidget {
                   ),
                   const Gap(kSP30x),
                   TextFieldWidget(
+                      controller: _nameController,
+                      hintText: "Name",
+                      isObscureText: false),
+                  const Gap(kSP10x),
+                  TextFieldWidget(
                       controller: _emailController,
                       hintText: "Email",
                       isObscureText: false),
@@ -76,6 +82,7 @@ class RegisterPage extends StatelessWidget {
                         try {
                           bloc.setUserEmail = _emailController.text;
                           bloc.setUserPassword = _passwordController.text;
+                          bloc.setUserName = _nameController.text;
                           await bloc.singUpUser();
                           context.navigateWithReplacement(AuthPage());
                         } catch (e) {

@@ -1,3 +1,4 @@
+import 'package:chatting_app/constants/dimension.dart';
 import 'package:flutter/material.dart';
 
 class ShowErrorWidget extends StatelessWidget {
@@ -13,7 +14,7 @@ class ShowErrorWidget extends StatelessWidget {
         textAlign: TextAlign.center,
         style: const TextStyle(
           fontWeight: FontWeight.w600,
-          fontSize: 18,
+          fontSize: kFontSize18x,
         ),
       ),
     );
