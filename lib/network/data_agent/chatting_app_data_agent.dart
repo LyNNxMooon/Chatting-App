@@ -7,7 +7,7 @@ abstract class ChattingAppDataAgent {
 
   Future<void> singOut();
 
-  Future<UserCredential> singUpUser(String email, String password);
+  Future<UserCredential> singUpUser(String email, String password, String name);
 
   Stream<List<UserVO>?> getUserListStream();
 }

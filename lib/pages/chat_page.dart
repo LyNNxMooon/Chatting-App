@@ -2,9 +2,9 @@ import 'package:chatting_app/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatelessWidget {
-  const ChatPage({super.key, required this.userEmail, required this.userID});
+  const ChatPage({super.key, required this.userName, required this.userID});
 
-  final String userEmail;
+  final String userName;
   final String userID;
 
   @override
@@ -13,10 +13,11 @@ class ChatPage extends StatelessWidget {
         child: Scaffold(
       backgroundColor: kPrimaryColor,
       appBar: AppBar(
+        leading: Text(''),
         elevation: 0,
         backgroundColor: kSecondaryColor,
         title: Text(
-          userEmail,
+          userName,
           style: TextStyle(color: kComponentColor),
         ),
         centerTitle: true,

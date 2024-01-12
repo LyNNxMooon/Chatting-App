@@ -7,8 +7,10 @@ class UserVO {
   String email;
   @JsonKey(name: 'uid')
   String uid;
+  @JsonKey(name: 'name')
+  String name;
 
-  UserVO({required this.email, required this.uid});
+  UserVO({required this.email, required this.uid, required this.name});
 
   factory UserVO.fromJson(Map<String, dynamic> json) => _$UserVOFromJson(json);
 
