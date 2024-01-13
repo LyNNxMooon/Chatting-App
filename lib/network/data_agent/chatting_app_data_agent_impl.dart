@@ -55,4 +55,12 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
           return UserVO.fromJson(e.data());
         }).toList();
       });
+
+  @override
+  Future<UserVO> getUserByID(String uid) async {
+    return _firebaseFirestore.collection('users').doc(uid).get().then((value) {
+      final rawData = value.data();
+      return UserVO.fromJson(Map<String, dynamic>.from(rawData as Map));
+    });
+  }
 }
