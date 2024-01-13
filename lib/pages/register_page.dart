@@ -2,8 +2,8 @@ import 'package:chatting_app/bloc/register_page_bloc.dart';
 import 'package:chatting_app/constants/colors.dart';
 import 'package:chatting_app/constants/dimension.dart';
 import 'package:chatting_app/constants/strings.dart';
-import 'package:chatting_app/pages/auth_page.dart';
 
+import 'package:chatting_app/pages/home_page.dart';
 import 'package:chatting_app/utils/extension.dart';
 import 'package:chatting_app/widgets/button_widget.dart';
 import 'package:chatting_app/widgets/text_field_widget.dart';
@@ -84,7 +84,7 @@ class RegisterPage extends StatelessWidget {
                           bloc.setUserPassword = _passwordController.text;
                           bloc.setUserName = _nameController.text;
                           await bloc.singUpUser();
-                          context.navigateWithReplacement(AuthPage());
+                          context.navigateWithReplacement(HomePage());
                         } catch (e) {
                           ScaffoldMessenger.of(buttonContext).showSnackBar(
                               SnackBar(content: Text(e.toString())));

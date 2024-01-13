@@ -4,9 +4,9 @@ import 'package:chatting_app/constants/dimension.dart';
 import 'package:chatting_app/constants/strings.dart';
 import 'package:chatting_app/data/vos/user_vo.dart';
 import 'package:chatting_app/pages/chat_page.dart';
-import 'package:chatting_app/pages/profile_page.dart';
 import 'package:chatting_app/utils/enums.dart';
 import 'package:chatting_app/utils/extension.dart';
+import 'package:chatting_app/widgets/drawer_widget.dart';
 import 'package:chatting_app/widgets/error_widget.dart';
 import 'package:chatting_app/widgets/loading_state_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,31 +25,34 @@ class HomePage extends StatelessWidget {
       child: SafeArea(
           child: Scaffold(
         backgroundColor: kPrimaryColor,
+        drawer: DrawerWidget(),
         appBar: AppBar(
-          leading: null,
-          elevation: 0,
-          backgroundColor: kSecondaryColor,
+          automaticallyImplyLeading: false,
+          elevation: 1,
+          backgroundColor: kPrimaryColor,
           title: Text(
             "Contacts",
             style: TextStyle(
-                color: kComponentColor,
+                color: kAppBarComponentColor,
                 fontWeight: FontWeight.bold,
                 fontSize: kFontSize24x),
           ),
           toolbarHeight: kSP70x,
           actions: [
-            GestureDetector(
-              onTap: () {
-                context.navigateToNext(ProfilePage());
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(right: kSP10x),
-                child: Icon(
-                  Icons.account_box,
-                  color: kComponentColor,
+            Builder(builder: (buttonContext) {
+              return GestureDetector(
+                onTap: () {
+                  Scaffold.of(buttonContext).openDrawer();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(right: kSP10x),
+                  child: Icon(
+                    Icons.menu_outlined,
+                    color: kAppBarComponentColor,
+                  ),
                 ),
-              ),
-            ),
+              );
+            }),
           ],
         ),
         body: Selector<HomePageBloc, LoadingState>(
@@ -126,8 +129,10 @@ class UserItemView extends StatelessWidget {
           Gap(kSP20x),
           Text(
             userName,
-            style:
-                TextStyle(fontWeight: FontWeight.bold, fontSize: kFontSize16x),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: kFontSize16x,
+            ),
           ),
         ],
       ),

@@ -22,4 +22,7 @@ class ChattingAppModel {
 
   Stream<List<UserVO>?> getUserListStream() =>
       _chattingAppDataAgent.getUserListStream();
+
+  Future<UserVO> getUserByID(String uid) =>
+      _chattingAppDataAgent.getUserByID(uid);
 }
