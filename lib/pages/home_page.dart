@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatting_app/bloc/home_page_bloc.dart';
 import 'package:chatting_app/constants/colors.dart';
 import 'package:chatting_app/constants/dimension.dart';
@@ -87,8 +88,9 @@ class HomePageUserListView extends StatelessWidget {
                       onTap: () => context.navigateToNext(ChatPage(
                           userName: userList![index].name,
                           userID: userList[index].uid)),
-                      child:
-                          UserItemView(userName: userList?[index].name ?? ''),
+                      child: UserItemView(
+                          userName: userList?[index].name ?? '',
+                          profileURL: userList?[index].profileURL ?? ''),
                     ),
                 itemCount: userList?.length ?? 0),
       ),
@@ -98,9 +100,11 @@ class HomePageUserListView extends StatelessWidget {
 }
 
 class UserItemView extends StatelessWidget {
-  const UserItemView({super.key, required this.userName});
+  const UserItemView(
+      {super.key, required this.userName, required this.profileURL});
 
   final String userName;
+  final String profileURL;
 
   @override
   Widget build(BuildContext context) {
@@ -118,10 +122,14 @@ class UserItemView extends StatelessWidget {
             decoration: BoxDecoration(
                 color: kAvatarColor,
                 borderRadius: BorderRadius.circular(kSP30x)),
-            child: Center(
-              child: Icon(
-                CupertinoIcons.profile_circled,
-                size: kSP35x,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(kSP40x),
+              child: CachedNetworkImage(
+                imageUrl: profileURL,
+                placeholder: (context, url) => const Center(
+                  child: Icon(Icons.person),
+                ),
+                fit: BoxFit.cover,
               ),
             ),
           ),
