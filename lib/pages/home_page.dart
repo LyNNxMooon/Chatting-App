@@ -73,8 +73,7 @@ class HomePageUserListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Selector<HomePageBloc, List<UserVO>?>(
       builder: (_, userList, __) => Padding(
-        padding:
-            const EdgeInsets.symmetric(horizontal: kSP20x, vertical: kSP30x),
+        padding: const EdgeInsets.symmetric(horizontal: kSP20x),
         child: (userList?.isEmpty ?? true)
             ? Center(
                 child: Text(
@@ -83,7 +82,7 @@ class HomePageUserListView extends StatelessWidget {
                       fontWeight: FontWeight.bold, fontSize: kFontSize18x),
                 ),
               )
-            : ListView.separated(
+            : ListView.builder(
                 itemBuilder: (_, index) => GestureDetector(
                       onTap: () => context.navigateToNext(ChatPage(
                           userName: userList![index].name,
@@ -91,7 +90,6 @@ class HomePageUserListView extends StatelessWidget {
                       child:
                           UserItemView(userName: userList?[index].name ?? ''),
                     ),
-                separatorBuilder: (_, index) => const Gap(kSP25x),
                 itemCount: userList?.length ?? 0),
       ),
       selector: (_, bloc) => bloc.getUserList,
@@ -107,6 +105,7 @@ class UserItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(top: kSP30x),
       width: MediaQuery.of(context).size.height * 0.8,
       decoration: BoxDecoration(
           color: kContactBackgroundColor,
