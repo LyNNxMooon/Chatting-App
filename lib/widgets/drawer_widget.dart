@@ -69,7 +69,7 @@ class DrawerItemsView extends StatelessWidget {
                 TextStyle(fontSize: kFontSize16x, fontWeight: FontWeight.bold),
           ),
         ),
-        Gap(MediaQuery.of(context).size.height * 0.45),
+        Gap(MediaQuery.of(context).size.height * 0.4),
         ListTile(
           leading: Icon(Icons.logout),
           title: Text(

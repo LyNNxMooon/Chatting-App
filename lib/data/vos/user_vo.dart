@@ -9,8 +9,14 @@ class UserVO {
   String uid;
   @JsonKey(name: 'name')
   String name;
+  @JsonKey(name: 'profile_url')
+  String profileURL;
 
-  UserVO({required this.email, required this.uid, required this.name});
+  UserVO(
+      {required this.email,
+      required this.uid,
+      required this.name,
+      required this.profileURL});
 
   factory UserVO.fromJson(Map<String, dynamic> json) => _$UserVOFromJson(json);
 

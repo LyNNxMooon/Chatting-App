@@ -8,6 +8,7 @@ const kSP25x = 25.0;
 const kSP30x = 30.0;
 const kSP35x = 35.0;
 const kSP40x = 40.0;
+const kSP50x = 50.0;
 const kSP70x = 70.0;
 const kSP100x = 100.0;
 
@@ -22,3 +23,4 @@ const kFontSize30x = 30.0;
 //width, height
 
 const kUserAvatarSquareLength = 55.0;
+const kRegisterProfileAvatarSquareLength = 100.0;
