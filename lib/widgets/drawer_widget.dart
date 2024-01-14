@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatting_app/bloc/profile_page_bloc.dart';
 import 'package:chatting_app/constants/colors.dart';
 import 'package:chatting_app/constants/dimension.dart';
@@ -7,6 +8,7 @@ import 'package:chatting_app/utils/enums.dart';
 import 'package:chatting_app/utils/extension.dart';
 import 'package:chatting_app/widgets/error_widget.dart';
 import 'package:chatting_app/widgets/loading_state_widget.dart';
+import 'package:chatting_app/widgets/loading_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -43,12 +45,32 @@ class DrawerItemsView extends StatelessWidget {
     final bloc = context.read<ProfilePageBloc>();
     return Selector<ProfilePageBloc, UserVO?>(
       builder: (_, user, __) => ListView(padding: EdgeInsets.zero, children: [
-        const DrawerHeader(
+        DrawerHeader(
           decoration: BoxDecoration(color: kSecondaryColor),
-          child: Text(
-            "Profile",
-            style:
-                TextStyle(fontSize: kFontSize30x, fontWeight: FontWeight.bold),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Profile",
+                style: TextStyle(
+                    fontSize: kFontSize30x, fontWeight: FontWeight.bold),
+              ),
+              Gap(kSP15x),
+              Container(
+                width: kProfilePageAvatarSquareLength,
+                height: kProfilePageAvatarSquareLength,
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(kSP40x)),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(kSP40x),
+                  child: CachedNetworkImage(
+                    imageUrl: user?.profileURL ?? '',
+                    placeholder: (context, url) => const LoadingWidget(),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              )
+            ],
           ),
         ),
         Gap(kSP20x),

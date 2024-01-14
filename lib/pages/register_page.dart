@@ -160,7 +160,13 @@ class ProfilePhotoView extends StatelessWidget {
         child: file != null
             ? ClipRRect(
                 borderRadius: BorderRadius.circular(kSP50x),
-                child: Positioned.fill(child: Image.file(File(file.path))))
+                child: Positioned.fill(
+                    child: Image.file(
+                  File(
+                    file.path,
+                  ),
+                  fit: BoxFit.cover,
+                )))
             : const ProfileAvatarView(),
       ),
       selector: (_, bloc) => bloc.getPickedFile,

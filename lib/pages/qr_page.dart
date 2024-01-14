@@ -2,6 +2,7 @@ import 'package:chatting_app/constants/colors.dart';
 import 'package:chatting_app/constants/dimension.dart';
 import 'package:chatting_app/widgets/drawer_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class QRPage extends StatelessWidget {
   const QRPage({super.key});
@@ -46,6 +47,12 @@ class QRPage extends StatelessWidget {
             }),
           ],
         ),
+        body: Center(
+            child: QrImageView(
+          data: '1234567890',
+          version: QrVersions.auto,
+          size: kQRCodeSquareLength,
+        )),
       ),
     );
   }
