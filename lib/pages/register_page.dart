@@ -8,6 +8,7 @@ import 'package:chatting_app/pages/navigator_page.dart';
 import 'package:chatting_app/utils/extension.dart';
 import 'package:chatting_app/utils/file_picker_utils.dart';
 import 'package:chatting_app/widgets/button_widget.dart';
+import 'package:chatting_app/widgets/loading_widget.dart';
 import 'package:chatting_app/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -78,11 +79,17 @@ class RegisterPage extends StatelessWidget {
                           return;
                         }
                         try {
+                          showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (_) => const LoadingWidget());
                           bloc.setUserEmail = _emailController.text;
                           bloc.setUserPassword = _passwordController.text;
                           bloc.setUserName = _nameController.text;
-                          await bloc.singUpUser();
-                          context.navigateWithReplacement(NavigatorPage());
+                          await bloc.singUpUser().then((value) {
+                            context.navigateBack();
+                            context.navigateWithReplacement(NavigatorPage());
+                          });
                         } catch (e) {
                           ScaffoldMessenger.of(buttonContext).showSnackBar(
                               SnackBar(content: Text(e.toString())));

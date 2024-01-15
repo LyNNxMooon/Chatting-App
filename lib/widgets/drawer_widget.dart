@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatting_app/bloc/profile_page_bloc.dart';
 import 'package:chatting_app/constants/colors.dart';
 import 'package:chatting_app/constants/dimension.dart';
+import 'package:chatting_app/data/model/chatting_app_hive_model.dart';
 import 'package:chatting_app/data/vos/user_vo.dart';
 import 'package:chatting_app/pages/auth_page.dart';
 import 'package:chatting_app/utils/enums.dart';
@@ -13,6 +14,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
+
+final ChattingAppHiveModel _chattingAppHiveModel = ChattingAppHiveModel();
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({
@@ -59,8 +62,9 @@ class DrawerItemsView extends StatelessWidget {
               Container(
                 width: kProfilePageAvatarSquareLength,
                 height: kProfilePageAvatarSquareLength,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(kSP40x)),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(kSP40x),
+                    color: kAvatarColor),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(kSP40x),
                   child: CachedNetworkImage(
@@ -100,6 +104,7 @@ class DrawerItemsView extends StatelessWidget {
                 TextStyle(fontSize: kFontSize16x, fontWeight: FontWeight.bold),
           ),
           onTap: () {
+            _chattingAppHiveModel.removeCurrentUserVO();
             bloc.singOut();
             context.navigateWithReplacement(AuthPage());
           },

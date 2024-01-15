@@ -15,6 +15,10 @@ abstract class ChattingAppDataAgent {
 
   Future<UserVO> getUserByID(String uid);
 
+  Future addFriendToCollection(UserVO otherUser);
+
+  Future addCurrentUserToOtherUserCollection(UserVO otherUser);
+
   //Chat Services
 
   Future<void> sendMessages(String receiverID, String message);

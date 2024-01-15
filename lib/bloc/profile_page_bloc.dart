@@ -1,4 +1,5 @@
 import 'package:chatting_app/bloc/base_bloc.dart';
+import 'package:chatting_app/data/model/chatting_app_hive_model.dart';
 import 'package:chatting_app/data/model/chatting_app_model.dart';
 import 'package:chatting_app/data/vos/user_vo.dart';
 import 'package:chatting_app/utils/enums.dart';
@@ -11,6 +12,7 @@ class ProfilePageBloc extends BaseBloc {
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final ChattingAppModel _chattingAppModel = ChattingAppModel();
+  final ChattingAppHiveModel _chattingAppHiveModel = ChattingAppHiveModel();
 
   Future<void> singOut() => _chattingAppModel.singOut();
 
@@ -23,6 +25,7 @@ class ProfilePageBloc extends BaseBloc {
         .then((value) {
       setLoadingState = LoadingState.complete;
       user = value;
+      _chattingAppHiveModel.saveCurrentUserVO(value);
       notifyListeners();
     }).catchError((error) {
       setLoadingState = LoadingState.error;
