@@ -7,3 +7,4 @@ Color kTextFieldsFillColor = Colors.grey.shade300;
 Color kAvatarColor = Colors.grey.shade400;
 Color kContactBackgroundColor = Colors.grey.shade200;
 Color kAppBarComponentColor = Color.fromARGB(255, 4, 194, 115);
+const kCancelColor = Colors.red;

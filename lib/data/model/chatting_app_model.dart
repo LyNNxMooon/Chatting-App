@@ -27,6 +27,12 @@ class ChattingAppModel {
   Future<UserVO> getUserByID(String uid) =>
       _chattingAppDataAgent.getUserByID(uid);
 
+  void addFriendToCollection(UserVO otherUser) =>
+      _chattingAppDataAgent.addFriendToCollection(otherUser);
+
+  void addCurrentUserToOtherUserCollection(UserVO otherUser) =>
+      _chattingAppDataAgent.addCurrentUserToOtherUserCollection(otherUser);
+
   //Chat Services
 
   Future<void> sendMessages(String receiverID, String message) =>

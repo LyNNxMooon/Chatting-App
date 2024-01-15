@@ -1,3 +1,4 @@
+import 'package:chatting_app/data/model/chatting_app_hive_model.dart';
 import 'package:chatting_app/data/vos/message_vo.dart';
 import 'package:chatting_app/data/vos/user_vo.dart';
 import 'package:chatting_app/network/data_agent/chatting_app_data_agent.dart';
@@ -13,6 +14,8 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+
+  final ChattingAppHiveModel _chattingAppHiveModel = ChattingAppHiveModel();
 
   @override
   Future<UserCredential> signInWithEmailAndPassword(
@@ -53,8 +56,12 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
   }
 
   @override
-  Stream<List<UserVO>?> getUserListStream() =>
-      _firebaseFirestore.collection('users').snapshots().map((event) {
+  Stream<List<UserVO>?> getUserListStream() => _firebaseFirestore
+          .collection('users')
+          .doc(_firebaseAuth.currentUser!.uid)
+          .collection('friends')
+          .snapshots()
+          .map((event) {
         return event.docs.map((e) {
           return UserVO.fromJson(e.data());
         }).toList();
@@ -111,4 +118,21 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
         .orderBy('time_stamp', descending: false)
         .snapshots();
   }
+
+  @override
+  Future addFriendToCollection(UserVO otherUser) => _firebaseFirestore
+      .collection('users')
+      .doc(_firebaseAuth.currentUser!.uid)
+      .collection('friends')
+      .doc(otherUser.uid)
+      .set(otherUser.toJson());
+
+  @override
+  Future addCurrentUserToOtherUserCollection(UserVO otherUser) =>
+      _firebaseFirestore
+          .collection('users')
+          .doc(otherUser.uid)
+          .collection('friends')
+          .doc(_firebaseAuth.currentUser!.uid)
+          .set(_chattingAppHiveModel.getCurrentUserVO!.toJson());
 }
