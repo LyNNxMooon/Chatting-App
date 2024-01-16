@@ -80,7 +80,8 @@ class LoginPage extends StatelessWidget {
                       const Text(kRegisterNavigationText),
                       const Gap(kSP10x),
                       GestureDetector(
-                        onTap: () => context.navigateToNext(RegisterPage()),
+                        onTap: () =>
+                            context.navigateWithReplacement(RegisterPage()),
                         child: const Text(
                           "Register",
                           style: TextStyle(

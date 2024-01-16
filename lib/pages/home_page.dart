@@ -10,7 +10,6 @@ import 'package:chatting_app/utils/extension.dart';
 import 'package:chatting_app/widgets/drawer_widget.dart';
 import 'package:chatting_app/widgets/error_widget.dart';
 import 'package:chatting_app/widgets/loading_state_widget.dart';
-import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
