@@ -4,6 +4,7 @@ import 'package:chatting_app/bloc/register_page_bloc.dart';
 import 'package:chatting_app/constants/colors.dart';
 import 'package:chatting_app/constants/dimension.dart';
 import 'package:chatting_app/constants/strings.dart';
+import 'package:chatting_app/pages/auth_page.dart';
 import 'package:chatting_app/pages/navigator_page.dart';
 import 'package:chatting_app/utils/extension.dart';
 import 'package:chatting_app/utils/file_picker_utils.dart';
@@ -95,7 +96,7 @@ class RegisterPage extends StatelessWidget {
                               SnackBar(content: Text(e.toString())));
                         }
                       },
-                      text: "Log In",
+                      text: "Sign Up",
                     );
                   }),
                   const Gap(kSP20x),
@@ -105,7 +106,8 @@ class RegisterPage extends StatelessWidget {
                       const Text(kLoginNavigationText),
                       const Gap(kSP10x),
                       GestureDetector(
-                        onTap: () => context.navigateBack(),
+                        onTap: () =>
+                            context.navigateWithReplacement(AuthPage()),
                         child: const Text(
                           "LogIn",
                           style: TextStyle(
