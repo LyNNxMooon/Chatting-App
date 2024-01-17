@@ -17,12 +17,17 @@ class TextFieldWidget extends StatelessWidget {
     return TextField(
       controller: controller,
       obscureText: isObscureText,
+      style: TextStyle(color: kComponentColor),
       decoration: InputDecoration(
           hintText: hintText,
-          enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: kPrimaryColor)),
-          focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: kComponentColor)),
+          enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.primary,
+          )),
+          focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.secondary,
+          )),
           fillColor: kTextFieldsFillColor,
           filled: true,
           hintStyle: const TextStyle(color: kComponentColor)),

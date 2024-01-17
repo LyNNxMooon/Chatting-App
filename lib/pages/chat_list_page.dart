@@ -10,12 +10,12 @@ class ChatListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          backgroundColor: kPrimaryColor,
+          backgroundColor: Theme.of(context).colorScheme.background,
           drawer: DrawerWidget(),
           appBar: AppBar(
             automaticallyImplyLeading: false,
             elevation: 1,
-            backgroundColor: kPrimaryColor,
+            backgroundColor: Theme.of(context).colorScheme.primary,
             title: Text(
               "Chats",
               style: TextStyle(
@@ -45,9 +45,10 @@ class ChatListPage extends StatelessWidget {
             child: Text(
               "no Chats For Now",
               textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: kFontSize18x,
+                color: Theme.of(context).colorScheme.secondary,
               ),
             ),
           )),

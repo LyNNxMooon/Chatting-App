@@ -18,10 +18,10 @@ class ScannerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      backgroundColor: kPrimaryColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         elevation: 1,
-        backgroundColor: kPrimaryColor,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         leading: GestureDetector(
             onTap: () {
               context.navigateBack();

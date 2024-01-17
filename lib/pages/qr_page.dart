@@ -25,7 +25,7 @@ class QRPage extends StatelessWidget {
       create: (context) => QRPageBloc(),
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: kPrimaryColor,
+          backgroundColor: Theme.of(context).colorScheme.background,
           floatingActionButton: Selector<QRPageBloc, LoadingState>(
               selector: (_, bloc) => bloc.getLoadingState,
               builder: (_, loadingState, __) =>
@@ -36,7 +36,7 @@ class QRPage extends StatelessWidget {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             elevation: 1,
-            backgroundColor: kPrimaryColor,
+            backgroundColor: Theme.of(context).colorScheme.primary,
             title: Text(
               "QR",
               style: TextStyle(
@@ -81,6 +81,7 @@ class QRPageItemView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: QrImageView(
+      backgroundColor: kPrimaryColor,
       data: jsonEncode(_chattingAppHiveModel.getCurrentUserVO),
       version: QrVersions.auto,
       size: kQRCodeSquareLength,

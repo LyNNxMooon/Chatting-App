@@ -5,6 +5,7 @@ import 'package:chatting_app/constants/strings.dart';
 import 'package:chatting_app/pages/register_page.dart';
 import 'package:chatting_app/utils/extension.dart';
 import 'package:chatting_app/widgets/button_widget.dart';
+import 'package:chatting_app/widgets/loading_widget.dart';
 import 'package:chatting_app/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -22,7 +23,7 @@ class LoginPage extends StatelessWidget {
       create: (context) => LoginPageBloc(),
       child: SafeArea(
           child: Scaffold(
-        backgroundColor: kPrimaryColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: Center(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
@@ -39,12 +40,12 @@ class LoginPage extends StatelessWidget {
                     size: kSP100x,
                   ),
                   const Gap(kSP20x),
-                  const Text(
+                  Text(
                     kLoginTitle,
                     style: TextStyle(
-                      fontSize: kFontSize20x,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontSize: kFontSize20x,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.secondary),
                   ),
                   const Gap(kSP30x),
                   TextFieldWidget(
@@ -62,10 +63,17 @@ class LoginPage extends StatelessWidget {
                     return ButtonWidget(
                       onTap: () async {
                         try {
+                          showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (_) => const LoadingWidget());
                           bloc.setUserEmail = _emailController.text;
                           bloc.setUserPassword = _passwordController.text;
-                          await bloc.signInWithEmailAndPassword();
+                          await bloc
+                              .signInWithEmailAndPassword()
+                              .then((value) => context.navigateBack());
                         } catch (e) {
+                          context.navigateBack();
                           ScaffoldMessenger.of(buttonContext).showSnackBar(
                               SnackBar(content: Text(e.toString())));
                         }
@@ -77,7 +85,12 @@ class LoginPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(kRegisterNavigationText),
+                      Text(
+                        kRegisterNavigationText,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
+                      ),
                       const Gap(kSP10x),
                       GestureDetector(
                         onTap: () =>

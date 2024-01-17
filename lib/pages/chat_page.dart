@@ -11,7 +11,7 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      backgroundColor: kPrimaryColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         leading: Text(''),
         elevation: 0,

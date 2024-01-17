@@ -5,7 +5,7 @@ import 'package:chatting_app/constants/colors.dart';
 import 'package:chatting_app/constants/dimension.dart';
 import 'package:chatting_app/constants/strings.dart';
 import 'package:chatting_app/pages/auth_page.dart';
-import 'package:chatting_app/pages/navigator_page.dart';
+
 import 'package:chatting_app/utils/extension.dart';
 import 'package:chatting_app/utils/file_picker_utils.dart';
 import 'package:chatting_app/widgets/button_widget.dart';
@@ -29,7 +29,7 @@ class RegisterPage extends StatelessWidget {
       create: (context) => RegisterPageBloc(),
       child: SafeArea(
           child: Scaffold(
-        backgroundColor: kPrimaryColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: Center(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
@@ -42,10 +42,12 @@ class RegisterPage extends StatelessWidget {
                 children: [
                   ProfilePhotoView(),
                   const Gap(kSP20x),
-                  const Text(
+                  Text(
                     kRegisterTitle,
                     style: TextStyle(
-                        fontSize: kFontSize20x, fontWeight: FontWeight.bold),
+                        fontSize: kFontSize20x,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.secondary),
                   ),
                   const Gap(kSP30x),
                   TextFieldWidget(
@@ -89,9 +91,10 @@ class RegisterPage extends StatelessWidget {
                           bloc.setUserName = _nameController.text;
                           await bloc.singUpUser().then((value) {
                             context.navigateBack();
-                            context.navigateWithReplacement(NavigatorPage());
+                            context.navigateWithReplacement(AuthPage());
                           });
                         } catch (e) {
+                          context.navigateBack();
                           ScaffoldMessenger.of(buttonContext).showSnackBar(
                               SnackBar(content: Text(e.toString())));
                         }
@@ -103,7 +106,11 @@ class RegisterPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(kLoginNavigationText),
+                      Text(
+                        kLoginNavigationText,
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary),
+                      ),
                       const Gap(kSP10x),
                       GestureDetector(
                         onTap: () =>
