@@ -1,4 +1,5 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:chatting_app/bloc/theme_bloc.dart';
 import 'package:chatting_app/constants/colors.dart';
 import 'package:chatting_app/constants/dimension.dart';
 import 'package:chatting_app/constants/strings.dart';
@@ -6,10 +7,12 @@ import 'package:chatting_app/data/vos/user_vo.dart';
 import 'package:chatting_app/firebase_options.dart';
 import 'package:chatting_app/pages/auth_page.dart';
 import 'package:chatting_app/persistent/hive_constant.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,16 +28,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: AnimatedSplashScreen(
-          centered: true,
-          duration: 2500,
-          splashIconSize: double.infinity,
-          splash: SplashScreenWidget(),
-          nextScreen: const AuthPage(),
-          splashTransition: SplashTransition.fadeTransition,
-          backgroundColor: kPrimaryColor),
-      debugShowCheckedModeBanner: false,
+    return ChangeNotifierProvider<ThemeBloc>(
+      create: (context) => ThemeBloc(),
+      child: Selector<ThemeBloc, ThemeData>(
+        builder: (_, theme, __) => MaterialApp(
+          home: AnimatedSplashScreen(
+              centered: true,
+              duration: 2500,
+              splashIconSize: double.infinity,
+              splash: SplashScreenWidget(),
+              nextScreen: const AuthPage(),
+              splashTransition: SplashTransition.fadeTransition,
+              backgroundColor: kPrimaryColor),
+          debugShowCheckedModeBanner: false,
+          theme: theme,
+        ),
+        selector: (_, bloc) => bloc.themeData,
+      ),
     );
   }
 }
@@ -61,7 +71,9 @@ class SplashScreenWidget extends StatelessWidget {
               Text(
                 kSplashScreenText,
                 style: TextStyle(
-                    fontSize: kFontSize16x, fontWeight: FontWeight.bold),
+                    fontSize: kFontSize16x,
+                    fontWeight: FontWeight.bold,
+                    color: kComponentColor),
               ),
               Gap(kSP5x),
               Text(

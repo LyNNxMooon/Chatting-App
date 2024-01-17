@@ -19,6 +19,7 @@ class DialogWidget extends StatelessWidget {
     return ChangeNotifierProvider<ScannerPageBloc>(
       create: (context) => ScannerPageBloc(),
       child: AlertDialog(
+        backgroundColor: Theme.of(context).colorScheme.background,
         content: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -48,7 +49,9 @@ class DialogWidget extends StatelessWidget {
                   Text(
                     user.name,
                     style: TextStyle(
-                        fontSize: kFontSize16x, fontWeight: FontWeight.bold),
+                        fontSize: kFontSize16x,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.secondary),
                   ),
                 ],
               ),
@@ -64,7 +67,9 @@ class DialogWidget extends StatelessWidget {
                   Text(
                     user.email,
                     style: TextStyle(
-                        fontSize: kFontSize16x, fontWeight: FontWeight.bold),
+                        fontSize: kFontSize16x,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.secondary),
                   ),
                 ],
               ),

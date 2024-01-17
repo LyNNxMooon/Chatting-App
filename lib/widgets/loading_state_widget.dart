@@ -7,18 +7,17 @@ class LoadingStateWidget extends StatelessWidget {
       {super.key,
       required this.loadingState,
       required this.loadingSuccessWidget,
-      this.loadingWidget,
       required this.errorWidget});
 
   final LoadingState loadingState;
   final Widget loadingSuccessWidget;
-  final Widget? loadingWidget;
+
   final Widget errorWidget;
 
   @override
   Widget build(BuildContext context) {
     return switch (loadingState) {
-      LoadingState.loading => loadingWidget ?? const LoadingWidget(),
+      LoadingState.loading => const LoadingWidget(),
       LoadingState.error => errorWidget,
       _ => loadingSuccessWidget,
     };

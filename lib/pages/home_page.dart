@@ -24,12 +24,12 @@ class HomePage extends StatelessWidget {
       create: (context) => HomePageBloc(),
       child: SafeArea(
           child: Scaffold(
-        backgroundColor: kPrimaryColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         drawer: DrawerWidget(),
         appBar: AppBar(
           automaticallyImplyLeading: false,
           elevation: 1,
-          backgroundColor: kPrimaryColor,
+          backgroundColor: Theme.of(context).colorScheme.primary,
           title: Text(
             "Contacts",
             style: TextStyle(
@@ -79,7 +79,10 @@ class HomePageUserListView extends StatelessWidget {
                 child: Text(
                   kUserListErrorText,
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: kFontSize18x),
+                    fontWeight: FontWeight.bold,
+                    fontSize: kFontSize18x,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
                 ),
               )
             : ListView.builder(
@@ -136,9 +139,9 @@ class UserItemView extends StatelessWidget {
           Text(
             userName,
             style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: kFontSize16x,
-            ),
+                fontWeight: FontWeight.bold,
+                fontSize: kFontSize16x,
+                color: kComponentColor),
           ),
         ],
       ),

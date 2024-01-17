@@ -3,6 +3,7 @@ import 'package:chatting_app/pages/chat_list_page.dart';
 import 'package:chatting_app/pages/home_page.dart';
 import 'package:chatting_app/pages/qr_page.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class NavigatorPage extends StatefulWidget {
@@ -20,20 +21,23 @@ class _NavigatorPageState extends State<NavigatorPage> {
   List<PersistentBottomNavBarItem> navBarItems() {
     return [
       PersistentBottomNavBarItem(
-          icon: const Icon(CupertinoIcons.chat_bubble),
-          title: ("Chats"),
-          activeColorPrimary: kSecondaryColor,
-          inactiveColorPrimary: kComponentColor),
+        icon: const Icon(CupertinoIcons.chat_bubble),
+        title: ("Chats"),
+        activeColorPrimary: kSecondaryColor,
+        inactiveColorPrimary: Theme.of(context).colorScheme.secondary,
+      ),
       PersistentBottomNavBarItem(
-          icon: const Icon(CupertinoIcons.person_2),
-          title: ("Contacts"),
-          activeColorPrimary: kSecondaryColor,
-          inactiveColorPrimary: kComponentColor),
+        icon: const Icon(CupertinoIcons.person_2),
+        title: ("Contacts"),
+        activeColorPrimary: kSecondaryColor,
+        inactiveColorPrimary: Theme.of(context).colorScheme.secondary,
+      ),
       PersistentBottomNavBarItem(
-          icon: const Icon(CupertinoIcons.qrcode),
-          title: ("QR"),
-          activeColorPrimary: kSecondaryColor,
-          inactiveColorPrimary: kComponentColor)
+        icon: const Icon(CupertinoIcons.qrcode),
+        title: ("QR"),
+        activeColorPrimary: kSecondaryColor,
+        inactiveColorPrimary: Theme.of(context).colorScheme.secondary,
+      )
     ];
   }
 
@@ -47,7 +51,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
       screens: buildScreens(),
       items: navBarItems(),
       confineInSafeArea: true,
-      backgroundColor: kPrimaryColor,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       handleAndroidBackButtonPress: true,
       resizeToAvoidBottomInset: true,
       stateManagement: true,
