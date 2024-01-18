@@ -115,9 +115,11 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
         .collection('chat_rooms')
         .doc(chatRoomID)
         .collection('messages')
-        .orderBy('time_stamp', descending: false)
+        .orderBy('time_stamp', descending: true)
         .snapshots();
   }
+
+  //End of Chat services
 
   @override
   Future addFriendToCollection(UserVO otherUser) => _firebaseFirestore

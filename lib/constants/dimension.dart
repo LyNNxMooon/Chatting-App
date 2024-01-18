@@ -26,3 +26,4 @@ const kUserAvatarSquareLength = 55.0;
 const kRegisterProfileAvatarSquareLength = 100.0;
 const kProfilePageAvatarSquareLength = 80.0;
 const kQRCodeSquareLength = 250.0;
+const kChatBubbleWidth = 270.0;
