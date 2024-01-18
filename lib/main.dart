@@ -20,6 +20,7 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserVOAdapter());
   await Hive.openBox<UserVO>(kHiveCurrentUserVOBox);
+  await Hive.openBox<bool>(kHiveThemeTriggerBox);
   runApp(const MyApp());
 }
 
@@ -73,7 +74,7 @@ class SplashScreenWidget extends StatelessWidget {
                 style: TextStyle(
                     fontSize: kFontSize16x,
                     fontWeight: FontWeight.bold,
-                    color: kComponentColor),
+                    color: Theme.of(context).colorScheme.secondary),
               ),
               Gap(kSP5x),
               Text(

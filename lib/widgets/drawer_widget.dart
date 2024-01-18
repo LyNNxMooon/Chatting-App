@@ -70,7 +70,9 @@ class _DrawerItemsViewState extends State<DrawerItemsView> {
               Text(
                 "Profile",
                 style: TextStyle(
-                    fontSize: kFontSize30x, fontWeight: FontWeight.bold),
+                    fontSize: kFontSize30x,
+                    fontWeight: FontWeight.bold,
+                    color: kComponentColor),
               ),
               Gap(kSP15x),
               Container(
@@ -142,9 +144,8 @@ class _DrawerItemsViewState extends State<DrawerItemsView> {
                   toggleSize: 45.0,
                   value: bloc.themeData == lightTheme ? false : true,
                   borderRadius: 30.0,
-                  //padding: 8.0,
                   showOnOff: true,
-                  onToggle: (val) {
+                  onToggle: (_) {
                     bloc.toggleTheme();
                   },
                 );

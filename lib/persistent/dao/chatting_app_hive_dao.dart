@@ -9,6 +9,7 @@ class ChattingAppDAO {
   factory ChattingAppDAO() => _singleton;
 
   Box<UserVO> getUserVOBox() => Hive.box<UserVO>(kHiveCurrentUserVOBox);
+  Box<bool> getThemeTriggerBox() => Hive.box<bool>(kHiveThemeTriggerBox);
 
   //save data
 
@@ -16,9 +17,14 @@ class ChattingAppDAO {
     getUserVOBox().put(KHiveUserVOTypeID, user);
   }
 
+  void saveThemeTrigger(bool trigger) {
+    getThemeTriggerBox().put(kHiveThemeTriggerID, trigger);
+  }
+
   //get data
 
   UserVO? get getCurrentUserVO => getUserVOBox().get(KHiveUserVOTypeID);
+  bool? get getThemeTrigger => getThemeTriggerBox().get(kHiveThemeTriggerID);
 
   //remove data
 

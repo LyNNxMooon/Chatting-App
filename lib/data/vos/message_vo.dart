@@ -18,7 +18,7 @@ class MessageVO {
     return {
       'sender_id': senderID,
       'sender_email': senderEmail,
-      'receiver_email': receiverID,
+      'receiver_id': receiverID,
       'message': message,
       'time_stamp': timeStamp
     };
