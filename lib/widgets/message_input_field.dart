@@ -1,4 +1,3 @@
-import 'package:chatting_app/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class MessageInputField extends StatelessWidget {
@@ -17,7 +16,7 @@ class MessageInputField extends StatelessWidget {
     return TextField(
       controller: controller,
       obscureText: isObscureText,
-      style: TextStyle(color: kComponentColor),
+      style: TextStyle(color: Theme.of(context).colorScheme.secondary),
       decoration: InputDecoration(
           hintText: hintText,
           enabledBorder: OutlineInputBorder(

@@ -1,3 +1,4 @@
+import 'package:chatting_app/data/vos/chatted_user_vo.dart';
 import 'package:chatting_app/data/vos/user_vo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,7 +22,10 @@ abstract class ChattingAppDataAgent {
 
   //Chat Services
 
-  Future<void> sendMessages(String receiverID, String message);
+  Future<void> sendMessages(String receiverID, String message,
+      String receiverName, String receiverProfile);
 
   Stream<QuerySnapshot> getMessages(String userID, String otherUserID);
+
+  Stream<List<ChattedUserVO>?> getChatListStream();
 }
