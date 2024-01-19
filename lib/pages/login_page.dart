@@ -2,6 +2,7 @@ import 'package:chatting_app/bloc/login_page_bloc.dart';
 import 'package:chatting_app/constants/colors.dart';
 import 'package:chatting_app/constants/dimension.dart';
 import 'package:chatting_app/constants/strings.dart';
+import 'package:chatting_app/pages/password_reset_page.dart';
 import 'package:chatting_app/pages/register_page.dart';
 import 'package:chatting_app/utils/extension.dart';
 import 'package:chatting_app/widgets/button_widget.dart';
@@ -57,7 +58,22 @@ class LoginPage extends StatelessWidget {
                       controller: _passwordController,
                       hintText: "Password",
                       isObscureText: true),
-                  const Gap(kSP15x),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PasswordResetPage(),
+                              )),
+                          child: Text(
+                            "Forgot Password?",
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary),
+                          ))
+                    ],
+                  ),
                   Builder(builder: (buttonContext) {
                     final bloc = buttonContext.read<LoginPageBloc>();
                     return ButtonWidget(
