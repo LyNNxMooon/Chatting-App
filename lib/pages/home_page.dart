@@ -88,7 +88,8 @@ class HomePageUserListView extends StatelessWidget {
             : ListView.builder(
                 itemBuilder: (_, index) => GestureDetector(
                       onTap: () => context.navigateToNext(ChatPage(
-                          userName: userList![index].name,
+                          userProfile: userList![index].profileURL,
+                          userName: userList[index].name,
                           userID: userList[index].uid)),
                       child: UserItemView(
                           userName: userList?[index].name ?? '',

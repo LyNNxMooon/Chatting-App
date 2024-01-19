@@ -16,10 +16,15 @@ final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 final ChattingAppModel _chattingAppModel = ChattingAppModel();
 
 class ChatPage extends StatelessWidget {
-  const ChatPage({super.key, required this.userName, required this.userID});
+  const ChatPage(
+      {super.key,
+      required this.userName,
+      required this.userID,
+      required this.userProfile});
 
   final String userName;
   final String userID;
+  final String userProfile;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +53,8 @@ class ChatPage extends StatelessWidget {
             Gap(kSP15x),
             MessageInputView(
               otherUserID: userID,
+              otherUserName: userName,
+              otherUserProfile: userProfile,
             )
           ],
         ),
@@ -126,9 +133,15 @@ class MessageItemView extends StatelessWidget {
 }
 
 class MessageInputView extends StatelessWidget {
-  MessageInputView({super.key, required this.otherUserID});
+  MessageInputView(
+      {super.key,
+      required this.otherUserID,
+      required this.otherUserName,
+      required this.otherUserProfile});
 
   final String otherUserID;
+  final String otherUserName;
+  final String otherUserProfile;
 
   final messageController = TextEditingController();
 
@@ -157,6 +170,8 @@ class MessageInputView extends StatelessWidget {
             onPressed: () {
               bloc.otherUserID = otherUserID;
               bloc.sendingMessage = messageController.text;
+              bloc.otherUserName = otherUserName;
+              bloc.otherUserProfile = otherUserProfile;
               bloc.sendMessages();
               messageController.clear();
             },

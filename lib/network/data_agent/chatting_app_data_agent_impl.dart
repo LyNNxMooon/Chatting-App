@@ -1,4 +1,5 @@
 import 'package:chatting_app/data/model/chatting_app_hive_model.dart';
+import 'package:chatting_app/data/vos/chatted_user_vo.dart';
 import 'package:chatting_app/data/vos/message_vo.dart';
 import 'package:chatting_app/data/vos/user_vo.dart';
 import 'package:chatting_app/network/data_agent/chatting_app_data_agent.dart';
@@ -77,8 +78,25 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
 
   //Chat services
 
+  // Future<String> getLastMessage(String chatRoomID) async {
+  //   Map collection;
+
+  //   QuerySnapshot<Map<String, dynamic>> data = await _firebaseFirestore
+  //       .collection('chat_rooms')
+  //       .doc(chatRoomID)
+  //       .collection('messages')
+  //       .orderBy('time_stamp', descending: true)
+  //       .limit(1)
+  //       .get();
+
+  //   collection = data.docs.first.data();
+
+  //   return collection['message'];
+  // }
+
   @override
-  Future<void> sendMessages(String receiverID, String message) async {
+  Future<void> sendMessages(String receiverID, String message,
+      String receiverName, String receiverProfile) async {
     final String currentUserID = _firebaseAuth.currentUser!.uid;
     final String currentUserEmail = _firebaseAuth.currentUser!.email.toString();
     final Timestamp timeStamp = Timestamp.now();
@@ -96,13 +114,39 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
     ids.sort();
     String chatRoomID = ids.join("_");
 
-    //Add Message to Chat Room
+    //Add Message and receiver to Chat Room
 
     await _firebaseFirestore
         .collection('chat_rooms')
         .doc(chatRoomID)
         .collection('messages')
         .add(newMessage.toJson());
+
+    await _firebaseFirestore
+        .collection('users')
+        .doc(currentUserID)
+        .collection('chats')
+        .doc(receiverID)
+        .set({
+      'name': receiverName,
+      'chatted_user_uid': receiverID,
+      'last_sender_uid': currentUserID,
+      'profile_url': receiverProfile,
+      'last_message': message
+    }, SetOptions(merge: true));
+
+    await _firebaseFirestore
+        .collection('users')
+        .doc(receiverID)
+        .collection('chats')
+        .doc(currentUserID)
+        .set({
+      'name': _chattingAppHiveModel.getCurrentUserVO?.name,
+      'chatted_user_uid': currentUserID,
+      'last_sender_uid': currentUserID,
+      'profile_url': _chattingAppHiveModel.getCurrentUserVO?.profileURL,
+      'last_message': message
+    }, SetOptions(merge: true));
   }
 
   @override
@@ -137,4 +181,16 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
           .collection('friends')
           .doc(_firebaseAuth.currentUser!.uid)
           .set(_chattingAppHiveModel.getCurrentUserVO!.toJson());
+
+  @override
+  Stream<List<ChattedUserVO>?> getChatListStream() => _firebaseFirestore
+          .collection('users')
+          .doc(_firebaseAuth.currentUser!.uid)
+          .collection('chats')
+          .snapshots()
+          .map((event) {
+        return event.docs.map((e) {
+          return ChattedUserVO.fromJson(e.data());
+        }).toList();
+      });
 }

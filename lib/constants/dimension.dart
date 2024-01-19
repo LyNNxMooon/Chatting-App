@@ -23,6 +23,7 @@ const kFontSize30x = 30.0;
 //width, height
 
 const kUserAvatarSquareLength = 55.0;
+const kChatListAvatarSquareLength = 65.0;
 const kRegisterProfileAvatarSquareLength = 100.0;
 const kProfilePageAvatarSquareLength = 80.0;
 const kQRCodeSquareLength = 250.0;
