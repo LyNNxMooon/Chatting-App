@@ -68,6 +68,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
         duration: Duration(milliseconds: 200),
       ),
       navBarStyle: NavBarStyle.style1,
+      //hideNavigationBar: true,
     );
   }
 }

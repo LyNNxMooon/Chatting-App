@@ -3,6 +3,7 @@ import 'package:chatting_app/bloc/profile_page_bloc.dart';
 import 'package:chatting_app/bloc/theme_bloc.dart';
 import 'package:chatting_app/constants/colors.dart';
 import 'package:chatting_app/constants/dimension.dart';
+import 'package:chatting_app/constants/strings.dart';
 import 'package:chatting_app/data/model/chatting_app_hive_model.dart';
 import 'package:chatting_app/data/vos/user_vo.dart';
 import 'package:chatting_app/pages/auth_page.dart';
@@ -75,18 +76,25 @@ class _DrawerItemsViewState extends State<DrawerItemsView> {
                     color: kComponentColor),
               ),
               Gap(kSP15x),
-              Container(
-                width: kProfilePageAvatarSquareLength,
-                height: kProfilePageAvatarSquareLength,
-                decoration: BoxDecoration(
+              GestureDetector(
+                onTap: () => showDialog(
+                  context: context,
+                  builder: (_) =>
+                      ChangeAvatarDialog(profile: user?.profileURL ?? ''),
+                ),
+                child: Container(
+                  width: kProfilePageAvatarSquareLength,
+                  height: kProfilePageAvatarSquareLength,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(kSP40x),
+                      color: kAvatarColor),
+                  child: ClipRRect(
                     borderRadius: BorderRadius.circular(kSP40x),
-                    color: kAvatarColor),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(kSP40x),
-                  child: CachedNetworkImage(
-                    imageUrl: user?.profileURL ?? '',
-                    placeholder: (context, url) => const LoadingWidget(),
-                    fit: BoxFit.cover,
+                    child: CachedNetworkImage(
+                      imageUrl: user?.profileURL ?? '',
+                      placeholder: (context, url) => const LoadingWidget(),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               )
@@ -188,6 +196,54 @@ class DrawerErrorWidget extends StatelessWidget {
     return Selector<ProfilePageBloc, String?>(
       builder: (_, error, __) => ShowErrorWidget(errorMessage: error ?? ''),
       selector: (_, bloc) => bloc.getErrorMessage,
+    );
+  }
+}
+
+class ChangeAvatarDialog extends StatelessWidget {
+  const ChangeAvatarDialog({super.key, required this.profile});
+
+  final String profile;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: kPrimaryColor,
+      content: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            kChangeAvatarText,
+            style: TextStyle(
+                color: kComponentColor,
+                fontSize: kFontSize16x,
+                fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(vertical: kSP20x),
+            width: kProfilePageAvatarSquareLength,
+            height: kProfilePageAvatarSquareLength,
+            decoration:
+                BoxDecoration(borderRadius: BorderRadius.circular(kSP40x)),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(kSP40x),
+              child: CachedNetworkImage(
+                imageUrl: profile,
+                placeholder: (context, url) => const LoadingWidget(),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text('Update'),
+            style: ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(kSecondaryColor)),
+          )
+        ],
+      ),
     );
   }
 }

@@ -2,6 +2,8 @@ import 'package:chatting_app/bloc/chat_page_bloc.dart';
 import 'package:chatting_app/constants/colors.dart';
 import 'package:chatting_app/constants/dimension.dart';
 import 'package:chatting_app/data/model/chatting_app_model.dart';
+import 'package:chatting_app/utils/extension.dart';
+
 import 'package:chatting_app/widgets/loading_widget.dart';
 import 'package:chatting_app/widgets/message_input_field.dart';
 
@@ -34,7 +36,13 @@ class ChatPage extends StatelessWidget {
           child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
-          leading: Text(''),
+          leading: GestureDetector(
+            onTap: () => context.navigateBack(),
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+          ),
           elevation: 0,
           backgroundColor: kSecondaryColor,
           title: Text(
@@ -55,7 +63,8 @@ class ChatPage extends StatelessWidget {
               otherUserID: userID,
               otherUserName: userName,
               otherUserProfile: userProfile,
-            )
+            ),
+            Gap(kSP15x)
           ],
         ),
       )),
@@ -157,10 +166,8 @@ class MessageInputView extends StatelessWidget {
         Container(
           width: 300,
           height: 60,
-          decoration: BoxDecoration(
-              border: Border.all(
-                  width: 1, color: Theme.of(context).colorScheme.secondary),
-              borderRadius: BorderRadius.circular(kSP25x)),
+          decoration:
+              BoxDecoration(borderRadius: BorderRadius.circular(kSP25x)),
           child: Center(
             child: MessageInputField(
                 controller: messageController,
