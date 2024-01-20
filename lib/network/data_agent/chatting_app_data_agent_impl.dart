@@ -18,6 +18,8 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
 
   final ChattingAppHiveModel _chattingAppHiveModel = ChattingAppHiveModel();
 
+  //Authentication and Creating users Collection
+
   @override
   Future<UserCredential> signInWithEmailAndPassword(
       String email, String password) async {
@@ -56,6 +58,8 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
     }
   }
 
+  //Displaying Added Friends List on Contacts (Home Page)
+
   @override
   Stream<List<UserVO>?> getUserListStream() => _firebaseFirestore
           .collection('users')
@@ -68,6 +72,8 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
         }).toList();
       });
 
+  //Get Current user Profile
+
   @override
   Future<UserVO> getUserByID(String uid) async {
     return _firebaseFirestore.collection('users').doc(uid).get().then((value) {
@@ -75,6 +81,8 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
       return UserVO.fromJson(Map<String, dynamic>.from(rawData as Map));
     });
   }
+
+  // Chat Services
 
   @override
   Future<void> sendMessages(String receiverID, String message,
@@ -147,7 +155,7 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
         .snapshots();
   }
 
-  //End of Chat services
+  //Adding users to friend List
 
   @override
   Future addFriendToCollection(UserVO otherUser) => _firebaseFirestore
@@ -166,6 +174,8 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
           .doc(_firebaseAuth.currentUser!.uid)
           .set(_chattingAppHiveModel.getCurrentUserVO!.toJson());
 
+  //Displaying Chatted Friend List
+
   @override
   Stream<List<ChattedUserVO>?> getChatListStream() => _firebaseFirestore
           .collection('users')
@@ -178,4 +188,18 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
           return ChattedUserVO.fromJson(e.data());
         }).toList();
       });
+
+  //Add user again with Updated profile pic
+
+  @override
+  Future addUserWithUpdatedProfile(UserVO user, String profileURL) =>
+      _firebaseFirestore
+          .collection('users')
+          .doc(_firebaseAuth.currentUser!.uid)
+          .set({
+        'email': user.email,
+        'name': user.name,
+        'profile_url': profileURL,
+        'uid': _firebaseAuth.currentUser!.uid
+      }, SetOptions(merge: true));
 }

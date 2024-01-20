@@ -1,3 +1,7 @@
+// ignore_for_file: must_be_immutable
+
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatting_app/bloc/profile_page_bloc.dart';
 import 'package:chatting_app/bloc/theme_bloc.dart';
@@ -7,9 +11,11 @@ import 'package:chatting_app/constants/strings.dart';
 import 'package:chatting_app/data/model/chatting_app_hive_model.dart';
 import 'package:chatting_app/data/vos/user_vo.dart';
 import 'package:chatting_app/pages/auth_page.dart';
+import 'package:chatting_app/pages/navigator_page.dart';
 import 'package:chatting_app/theme/light_theme.dart';
 import 'package:chatting_app/utils/enums.dart';
 import 'package:chatting_app/utils/extension.dart';
+import 'package:chatting_app/utils/file_picker_utils.dart';
 import 'package:chatting_app/widgets/error_widget.dart';
 import 'package:chatting_app/widgets/loading_state_widget.dart';
 import 'package:chatting_app/widgets/loading_widget.dart';
@@ -20,6 +26,10 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 final ChattingAppHiveModel _chattingAppHiveModel = ChattingAppHiveModel();
+
+bool isChosenPic = false;
+
+bool isPickedFromFile = false;
 
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({
@@ -79,8 +89,7 @@ class _DrawerItemsViewState extends State<DrawerItemsView> {
               GestureDetector(
                 onTap: () => showDialog(
                   context: context,
-                  builder: (_) =>
-                      ChangeAvatarDialog(profile: user?.profileURL ?? ''),
+                  builder: (_) => ChangeAvatarDialog(),
                 ),
                 child: Container(
                   width: kProfilePageAvatarSquareLength,
@@ -201,49 +210,140 @@ class DrawerErrorWidget extends StatelessWidget {
 }
 
 class ChangeAvatarDialog extends StatelessWidget {
-  const ChangeAvatarDialog({super.key, required this.profile});
-
-  final String profile;
+  ChangeAvatarDialog({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      backgroundColor: kPrimaryColor,
-      content: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            kChangeAvatarText,
-            style: TextStyle(
-                color: kComponentColor,
-                fontSize: kFontSize16x,
-                fontWeight: FontWeight.bold),
-            textAlign: TextAlign.center,
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: kSP20x),
-            width: kProfilePageAvatarSquareLength,
-            height: kProfilePageAvatarSquareLength,
-            decoration:
-                BoxDecoration(borderRadius: BorderRadius.circular(kSP40x)),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(kSP40x),
-              child: CachedNetworkImage(
-                imageUrl: profile,
-                placeholder: (context, url) => const LoadingWidget(),
-                fit: BoxFit.cover,
-              ),
+    return ChangeNotifierProvider<ProfilePageBloc>(
+      create: (context) => ProfilePageBloc(),
+      child: AlertDialog(
+        backgroundColor: kPrimaryColor,
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              kChangeAvatarText,
+              style: TextStyle(
+                  color: kComponentColor,
+                  fontSize: kFontSize16x,
+                  fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
             ),
-          ),
-          ElevatedButton(
-            onPressed: () {},
-            child: Text('Update'),
-            style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(kSecondaryColor)),
-          )
-        ],
+            UpdatedAvatarView(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Builder(builder: (buttonContext) {
+                  return ElevatedButton(
+                    onPressed: () async {
+                      final bloc = buttonContext.read<ProfilePageBloc>();
+                      if (isChosenPic && isPickedFromFile) {
+                        showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (_) => const LoadingWidget());
+                        bloc.addUserWithUpdatedProfile().then((value) {
+                          context.navigateBack();
+                          context.navigateBack();
+                          context.navigateWithReplacement(NavigatorPage());
+                        });
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                              content: Text("Choose a photo to update")),
+                        );
+                      }
+                    },
+                    child: Text('Update'),
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll(kSecondaryColor)),
+                  );
+                }),
+                Gap(kSP10x),
+                ElevatedButton(
+                  onPressed: () {
+                    context.navigateBack();
+                  },
+                  child: Text(
+                    "Cancel",
+                    style: TextStyle(color: kPrimaryColor),
+                  ),
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(kCancelColor)),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class UpdateAvatarIconView extends StatelessWidget {
+  UpdateAvatarIconView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+        onTap: () async {
+          isChosenPic = true;
+          final bloc = context.read<ProfilePageBloc>();
+          final image = await FilePickerUtils.getImage();
+
+          if (image != null) {
+            isPickedFromFile = true;
+          }
+
+          bloc.setPickedFile = image;
+        },
+        child: Container(
+          margin: EdgeInsets.symmetric(vertical: kSP20x),
+          width: kProfilePageAvatarSquareLength,
+          height: kProfilePageAvatarSquareLength,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(kSP40x),
+              color: kSecondaryColor),
+          child: Icon(Icons.add_a_photo),
+        ));
+  }
+}
+
+class UpdatedAvatarView extends StatelessWidget {
+  UpdatedAvatarView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Selector<ProfilePageBloc, File?>(
+      builder: (_, file, __) => Container(
+        margin: EdgeInsets.symmetric(vertical: kSP20x),
+        width: kProfilePageAvatarSquareLength,
+        height: kProfilePageAvatarSquareLength,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(kSP40x),
+            color: kSecondaryColor),
+        child: file != null
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(kSP40x),
+                child: Positioned.fill(
+                    child: Image.file(
+                  File(
+                    file.path,
+                  ),
+                  fit: BoxFit.cover,
+                )))
+            : UpdateAvatarIconView(),
+      ),
+      selector: (_, bloc) => bloc.getPickedFile,
     );
   }
 }
