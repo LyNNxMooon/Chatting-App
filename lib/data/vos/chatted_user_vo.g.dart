@@ -13,6 +13,7 @@ ChattedUserVO _$ChattedUserVOFromJson(Map<String, dynamic> json) =>
       lastSenderID: json['last_sender_uid'] as String,
       profileURL: json['profile_url'] as String,
       lastMessage: json['last_message'] as String,
+      dateTime: json['date_time'] as String,
     );
 
 Map<String, dynamic> _$ChattedUserVOToJson(ChattedUserVO instance) =>
@@ -22,4 +23,5 @@ Map<String, dynamic> _$ChattedUserVOToJson(ChattedUserVO instance) =>
       'last_sender_uid': instance.lastSenderID,
       'profile_url': instance.profileURL,
       'last_message': instance.lastMessage,
+      'date_time': instance.dateTime,
     };

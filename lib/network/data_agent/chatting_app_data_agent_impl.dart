@@ -76,24 +76,6 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
     });
   }
 
-  //Chat services
-
-  // Future<String> getLastMessage(String chatRoomID) async {
-  //   Map collection;
-
-  //   QuerySnapshot<Map<String, dynamic>> data = await _firebaseFirestore
-  //       .collection('chat_rooms')
-  //       .doc(chatRoomID)
-  //       .collection('messages')
-  //       .orderBy('time_stamp', descending: true)
-  //       .limit(1)
-  //       .get();
-
-  //   collection = data.docs.first.data();
-
-  //   return collection['message'];
-  // }
-
   @override
   Future<void> sendMessages(String receiverID, String message,
       String receiverName, String receiverProfile) async {
@@ -132,7 +114,8 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
       'chatted_user_uid': receiverID,
       'last_sender_uid': currentUserID,
       'profile_url': receiverProfile,
-      'last_message': message
+      'last_message': message,
+      'date_time': "${DateTime.now()}",
     }, SetOptions(merge: true));
 
     await _firebaseFirestore
@@ -145,7 +128,8 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
       'chatted_user_uid': currentUserID,
       'last_sender_uid': currentUserID,
       'profile_url': _chattingAppHiveModel.getCurrentUserVO?.profileURL,
-      'last_message': message
+      'last_message': message,
+      'date_time': "${DateTime.now()}",
     }, SetOptions(merge: true));
   }
 
@@ -187,6 +171,7 @@ class ChattingAppDataAgentImpl extends ChattingAppDataAgent {
           .collection('users')
           .doc(_firebaseAuth.currentUser!.uid)
           .collection('chats')
+          .orderBy('date_time', descending: true)
           .snapshots()
           .map((event) {
         return event.docs.map((e) {

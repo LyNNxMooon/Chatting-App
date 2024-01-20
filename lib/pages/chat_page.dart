@@ -85,11 +85,14 @@ class MessageListView extends StatelessWidget {
           );
         }
 
-        return ListView(
-          reverse: true,
-          children: snapshot.data!.docs
-              .map((document) => MessageItemView(document: document))
-              .toList(),
+        return Padding(
+          padding: const EdgeInsets.only(top: kSP15x),
+          child: ListView(
+            reverse: true,
+            children: snapshot.data!.docs
+                .map((document) => MessageItemView(document: document))
+                .toList(),
+          ),
         );
       },
     );
