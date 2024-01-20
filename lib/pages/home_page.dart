@@ -6,13 +6,14 @@ import 'package:chatting_app/constants/strings.dart';
 import 'package:chatting_app/data/vos/user_vo.dart';
 import 'package:chatting_app/pages/chat_page.dart';
 import 'package:chatting_app/utils/enums.dart';
-import 'package:chatting_app/utils/extension.dart';
+
 import 'package:chatting_app/widgets/drawer_widget.dart';
 import 'package:chatting_app/widgets/error_widget.dart';
 import 'package:chatting_app/widgets/loading_state_widget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -87,10 +88,14 @@ class HomePageUserListView extends StatelessWidget {
               )
             : ListView.builder(
                 itemBuilder: (_, index) => GestureDetector(
-                      onTap: () => context.navigateToNext(ChatPage(
-                          userProfile: userList![index].profileURL,
-                          userName: userList[index].name,
-                          userID: userList[index].uid)),
+                      onTap: () => PersistentNavBarNavigator.pushNewScreen(
+                        context,
+                        screen: ChatPage(
+                            userProfile: userList![index].profileURL,
+                            userName: userList[index].name,
+                            userID: userList[index].uid),
+                        withNavBar: false,
+                      ),
                       child: UserItemView(
                           userName: userList?[index].name ?? '',
                           profileURL: userList?[index].profileURL ?? ''),

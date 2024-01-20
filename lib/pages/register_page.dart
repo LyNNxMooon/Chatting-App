@@ -19,8 +19,11 @@ class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
 
   final _nameController = TextEditingController();
+
   final _emailController = TextEditingController();
+
   final _passwordController = TextEditingController();
+
   final _confirmPasswordController = TextEditingController();
 
   @override
@@ -42,12 +45,15 @@ class RegisterPage extends StatelessWidget {
                 children: [
                   ProfilePhotoView(),
                   const Gap(kSP20x),
-                  Text(
-                    kRegisterTitle,
-                    style: TextStyle(
-                        fontSize: kFontSize20x,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.secondary),
+                  Selector<RegisterPageBloc, File?>(
+                    builder: (_, file, __) => Text(
+                      file != null ? kRegisterAfterAvatarText : kRegisterTitle,
+                      style: TextStyle(
+                          fontSize: kFontSize20x,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.secondary),
+                    ),
+                    selector: (_, bloc) => bloc.getPickedFile,
                   ),
                   const Gap(kSP30x),
                   TextFieldWidget(
@@ -169,22 +175,25 @@ class ProfilePhotoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Selector<RegisterPageBloc, File?>(
-      builder: (_, file, __) => Container(
-        width: kRegisterProfileAvatarSquareLength,
-        height: kRegisterProfileAvatarSquareLength,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(kSP50x)),
-        child: file != null
-            ? ClipRRect(
-                borderRadius: BorderRadius.circular(kSP50x),
-                child: Positioned.fill(
-                    child: Image.file(
-                  File(
-                    file.path,
-                  ),
-                  fit: BoxFit.cover,
-                )))
-            : const ProfileAvatarView(),
-      ),
+      builder: (_, file, __) {
+        return Container(
+          width: kRegisterProfileAvatarSquareLength,
+          height: kRegisterProfileAvatarSquareLength,
+          decoration:
+              BoxDecoration(borderRadius: BorderRadius.circular(kSP50x)),
+          child: file != null
+              ? ClipRRect(
+                  borderRadius: BorderRadius.circular(kSP50x),
+                  child: Positioned.fill(
+                      child: Image.file(
+                    File(
+                      file.path,
+                    ),
+                    fit: BoxFit.cover,
+                  )))
+              : const ProfileAvatarView(),
+        );
+      },
       selector: (_, bloc) => bloc.getPickedFile,
     );
   }

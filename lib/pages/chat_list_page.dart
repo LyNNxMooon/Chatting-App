@@ -6,13 +6,13 @@ import 'package:chatting_app/constants/strings.dart';
 import 'package:chatting_app/data/vos/chatted_user_vo.dart';
 import 'package:chatting_app/pages/chat_page.dart';
 import 'package:chatting_app/utils/enums.dart';
-import 'package:chatting_app/utils/extension.dart';
 import 'package:chatting_app/widgets/drawer_widget.dart';
 import 'package:chatting_app/widgets/error_widget.dart';
 import 'package:chatting_app/widgets/loading_state_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:provider/provider.dart';
 
 final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -90,10 +90,14 @@ class ChatListView extends StatelessWidget {
               )
             : ListView.builder(
                 itemBuilder: (_, index) => GestureDetector(
-                      onTap: () => context.navigateToNext(ChatPage(
-                          userProfile: userList[index].profileURL,
-                          userName: userList[index].chattedUserName,
-                          userID: userList[index].chattedUserID)),
+                      onTap: () => PersistentNavBarNavigator.pushNewScreen(
+                        context,
+                        screen: ChatPage(
+                            userProfile: userList[index].profileURL,
+                            userName: userList[index].chattedUserName,
+                            userID: userList[index].chattedUserID),
+                        withNavBar: false,
+                      ),
                       child: ChatListItemView(
                         user: userList![index],
                       ),

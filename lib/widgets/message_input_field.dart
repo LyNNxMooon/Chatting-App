@@ -1,3 +1,4 @@
+import 'package:chatting_app/constants/dimension.dart';
 import 'package:flutter/material.dart';
 
 class MessageInputField extends StatelessWidget {
@@ -17,12 +18,19 @@ class MessageInputField extends StatelessWidget {
       controller: controller,
       obscureText: isObscureText,
       style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+      cursorRadius: Radius.circular(kSP25x),
       decoration: InputDecoration(
           hintText: hintText,
           enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(kSP25x),
               borderSide: BorderSide(
-            color: Colors.transparent,
-          )),
+                color: Theme.of(context).colorScheme.secondary,
+              )),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(kSP25x),
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.secondary,
+              )),
           hintStyle: TextStyle(color: Theme.of(context).colorScheme.secondary)),
     );
   }
