@@ -11,7 +11,10 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 class DialogWidget extends StatelessWidget {
-  const DialogWidget({super.key, required this.user});
+  const DialogWidget(
+      {super.key, required this.user, required this.scannerContext});
+
+  final BuildContext scannerContext;
 
   final UserVO user;
   @override
@@ -91,6 +94,7 @@ class DialogWidget extends StatelessWidget {
                       bloc.addCurrentUserToOtherUserCollection().then((value) {
                         context.navigateBack();
                         context.navigateBack();
+                        scannerContext.navigateBack();
                       });
                     },
                     child: Text(
@@ -106,6 +110,7 @@ class DialogWidget extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     context.navigateBack();
+                    scannerContext.navigateBack();
                   },
                   child: Text(
                     "Cancel",

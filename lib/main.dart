@@ -74,7 +74,7 @@ class SplashScreenWidget extends StatelessWidget {
                 style: TextStyle(
                     fontSize: kFontSize16x,
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.secondary),
+                    color: kComponentColor),
               ),
               Gap(kSP5x),
               Text(

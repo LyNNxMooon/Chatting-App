@@ -18,12 +18,16 @@ class ChattedUserVO {
   @JsonKey(name: 'last_message')
   String lastMessage;
 
+  @JsonKey(name: 'date_time')
+  String dateTime;
+
   ChattedUserVO(
       {required this.chattedUserName,
       required this.chattedUserID,
       required this.lastSenderID,
       required this.profileURL,
-      required this.lastMessage});
+      required this.lastMessage,
+      required this.dateTime});
 
   factory ChattedUserVO.fromJson(Map<String, dynamic> json) =>
       _$ChattedUserVOFromJson(json);

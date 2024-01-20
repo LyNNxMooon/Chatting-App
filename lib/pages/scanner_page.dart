@@ -10,8 +10,14 @@ import 'package:flutter/material.dart';
 
 import 'package:scan/scan.dart';
 
-class ScannerPage extends StatelessWidget {
+class ScannerPage extends StatefulWidget {
   ScannerPage({super.key});
+
+  @override
+  State<ScannerPage> createState() => _ScannerPageState();
+}
+
+class _ScannerPageState extends State<ScannerPage> {
   ScanController controller = ScanController();
 
   @override
@@ -47,6 +53,7 @@ class ScannerPage extends StatelessWidget {
                   context: context,
                   builder: (_) {
                     return DialogWidget(
+                      scannerContext: context,
                       user: user,
                     );
                   },
@@ -54,6 +61,7 @@ class ScannerPage extends StatelessWidget {
               } catch (error) {
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text(error.toString())));
+                context.navigateBack();
               }
             },
           ),
