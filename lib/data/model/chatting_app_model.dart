@@ -37,8 +37,6 @@ class ChattingAppModel {
   void addCurrentUserToOtherUserCollection(UserVO otherUser) =>
       _chattingAppDataAgent.addCurrentUserToOtherUserCollection(otherUser);
 
-  //Chat Services
-
   Future<void> sendMessages(String receiverID, String message,
           String receiverName, String receiverProfile) =>
       _chattingAppDataAgent.sendMessages(
@@ -46,4 +44,7 @@ class ChattingAppModel {
 
   Stream<QuerySnapshot> getMessages(String userID, String otherUserID) =>
       _chattingAppDataAgent.getMessages(userID, otherUserID);
+
+  void addUserWithUpdatedProfile(UserVO user, String profileURL) =>
+      _chattingAppDataAgent.addUserWithUpdatedProfile(user, profileURL);
 }

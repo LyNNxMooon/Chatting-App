@@ -20,12 +20,12 @@ abstract class ChattingAppDataAgent {
 
   Future addCurrentUserToOtherUserCollection(UserVO otherUser);
 
-  //Chat Services
-
   Future<void> sendMessages(String receiverID, String message,
       String receiverName, String receiverProfile);
 
   Stream<QuerySnapshot> getMessages(String userID, String otherUserID);
 
   Stream<List<ChattedUserVO>?> getChatListStream();
+
+  Future addUserWithUpdatedProfile(UserVO user, String profileURL);
 }
