@@ -11,3 +11,4 @@ const kPasswordResetTitleText =
 const kSuccessfulPasswordLinkSentText =
     "Check Your Email! We've sent the password reset link";
 const kChangeAvatarText = "Choose a photo to change your avatar";
+const kUpdateProfileSuccessText = "Successfully Updated Profile";

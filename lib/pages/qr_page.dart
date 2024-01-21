@@ -42,7 +42,8 @@ class QRPage extends StatelessWidget {
               style: TextStyle(
                   color: kAppBarComponentColor,
                   fontWeight: FontWeight.bold,
-                  fontSize: kFontSize24x),
+                  fontSize: kFontSize24x,
+                  fontFamily: "Raleway"),
             ),
             toolbarHeight: kSP70x,
             actions: [

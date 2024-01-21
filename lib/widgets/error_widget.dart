@@ -13,10 +13,10 @@ class ShowErrorWidget extends StatelessWidget {
         errorMessage,
         textAlign: TextAlign.center,
         style: TextStyle(
-          fontWeight: FontWeight.w600,
-          fontSize: kFontSize18x,
-          color: Theme.of(context).colorScheme.secondary,
-        ),
+            fontWeight: FontWeight.w600,
+            fontSize: kFontSize18x,
+            color: Theme.of(context).colorScheme.secondary,
+            fontFamily: "Raleway"),
       ),
     );
   }

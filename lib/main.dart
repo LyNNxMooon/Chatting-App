@@ -74,7 +74,8 @@ class SplashScreenWidget extends StatelessWidget {
                 style: TextStyle(
                     fontSize: kFontSize16x,
                     fontWeight: FontWeight.bold,
-                    color: kComponentColor),
+                    color: kComponentColor,
+                    fontFamily: "Raleway"),
               ),
               Gap(kSP5x),
               Text(
@@ -82,7 +83,8 @@ class SplashScreenWidget extends StatelessWidget {
                 style: TextStyle(
                     color: kSecondaryColor,
                     fontSize: kFontSize18x,
-                    fontWeight: FontWeight.bold),
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Raleway"),
               )
             ],
           )

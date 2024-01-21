@@ -54,7 +54,8 @@ class DialogWidget extends StatelessWidget {
                     style: TextStyle(
                         fontSize: kFontSize16x,
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.secondary),
+                        color: Theme.of(context).colorScheme.secondary,
+                        fontFamily: "Raleway"),
                   ),
                 ],
               ),
@@ -72,7 +73,8 @@ class DialogWidget extends StatelessWidget {
                     style: TextStyle(
                         fontSize: kFontSize16x,
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.secondary),
+                        color: Theme.of(context).colorScheme.secondary,
+                        fontFamily: "Raleway"),
                   ),
                 ],
               ),
@@ -99,7 +101,8 @@ class DialogWidget extends StatelessWidget {
                     },
                     child: Text(
                       "Add Friend",
-                      style: TextStyle(color: kPrimaryColor),
+                      style: TextStyle(
+                          color: kPrimaryColor, fontFamily: "Raleway"),
                     ),
                     style: ButtonStyle(
                         backgroundColor:
@@ -114,7 +117,8 @@ class DialogWidget extends StatelessWidget {
                   },
                   child: Text(
                     "Cancel",
-                    style: TextStyle(color: kPrimaryColor),
+                    style:
+                        TextStyle(color: kPrimaryColor, fontFamily: "Raleway"),
                   ),
                   style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(kCancelColor)),

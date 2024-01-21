@@ -47,7 +47,10 @@ class ChatPage extends StatelessWidget {
           backgroundColor: kSecondaryColor,
           title: Text(
             userName,
-            style: TextStyle(color: kComponentColor),
+            style: TextStyle(
+                color: kComponentColor,
+                fontFamily: "Raleway",
+                fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
         ),
@@ -135,9 +138,9 @@ class MessageItemView extends StatelessWidget {
         child: Text(
           data['message'],
           style: TextStyle(
-            fontSize: kFontSize18x,
-            color: kComponentColor,
-          ),
+              fontSize: kFontSize18x,
+              color: kComponentColor,
+              fontFamily: "Raleway"),
         ),
       ),
     );

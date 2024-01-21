@@ -37,7 +37,8 @@ class ChatListPage extends StatelessWidget {
               style: TextStyle(
                   color: kAppBarComponentColor,
                   fontWeight: FontWeight.bold,
-                  fontSize: kFontSize24x),
+                  fontSize: kFontSize24x,
+                  fontFamily: "Raleway"),
             ),
             toolbarHeight: kSP70x,
             actions: [
@@ -82,10 +83,10 @@ class ChatListView extends StatelessWidget {
                 child: Text(
                   kChatListErrorText,
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: kFontSize18x,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
+                      fontWeight: FontWeight.bold,
+                      fontSize: kFontSize18x,
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontFamily: "Raleway"),
                 ),
               )
             : ListView.builder(
@@ -150,14 +151,15 @@ class ChatListItemView extends StatelessWidget {
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: kFontSize16x,
-                    color: kComponentColor),
+                    color: kComponentColor,
+                    fontFamily: "Raleway"),
               ),
               Gap(kSP10x),
               Text(
                 user.lastSenderID == _firebaseAuth.currentUser!.uid
                     ? "You: ${user.lastMessage.characters.take(20)}..."
                     : "${user.lastMessage.characters.take(20)}...",
-                style: TextStyle(color: kComponentColor),
+                style: TextStyle(color: kComponentColor, fontFamily: "Raleway"),
               )
             ],
           ),
