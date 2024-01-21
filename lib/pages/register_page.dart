@@ -51,7 +51,8 @@ class RegisterPage extends StatelessWidget {
                       style: TextStyle(
                           fontSize: kFontSize20x,
                           fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.secondary),
+                          color: Theme.of(context).colorScheme.secondary,
+                          fontFamily: "Raleway"),
                     ),
                     selector: (_, bloc) => bloc.getPickedFile,
                   ),
@@ -115,7 +116,8 @@ class RegisterPage extends StatelessWidget {
                       Text(
                         kLoginNavigationText,
                         style: TextStyle(
-                            color: Theme.of(context).colorScheme.secondary),
+                            color: Theme.of(context).colorScheme.secondary,
+                            fontFamily: "Raleway"),
                       ),
                       const Gap(kSP10x),
                       GestureDetector(
@@ -125,7 +127,8 @@ class RegisterPage extends StatelessWidget {
                           "LogIn",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: kSecondaryColor),
+                              color: kSecondaryColor,
+                              fontFamily: "Raleway"),
                         ),
                       )
                     ],

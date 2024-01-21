@@ -17,7 +17,7 @@ class TextFieldWidget extends StatelessWidget {
     return TextField(
       controller: controller,
       obscureText: isObscureText,
-      style: TextStyle(color: kComponentColor),
+      style: TextStyle(color: kComponentColor, fontFamily: "Raleway"),
       decoration: InputDecoration(
           hintText: hintText,
           enabledBorder: OutlineInputBorder(
@@ -30,7 +30,8 @@ class TextFieldWidget extends StatelessWidget {
           )),
           fillColor: kTextFieldsFillColor,
           filled: true,
-          hintStyle: const TextStyle(color: kComponentColor)),
+          hintStyle:
+              const TextStyle(color: kComponentColor, fontFamily: "Raleway")),
     );
   }
 }

@@ -21,7 +21,9 @@ class ButtonWidget extends StatelessWidget {
           child: Text(
             text,
             style: const TextStyle(
-                color: kComponentColor, fontWeight: FontWeight.bold),
+                color: kComponentColor,
+                fontWeight: FontWeight.bold,
+                fontFamily: "Raleway"),
           ),
         ),
       ),

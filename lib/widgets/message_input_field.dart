@@ -17,7 +17,9 @@ class MessageInputField extends StatelessWidget {
     return TextField(
       controller: controller,
       obscureText: isObscureText,
-      style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+      style: TextStyle(
+          color: Theme.of(context).colorScheme.secondary,
+          fontFamily: "Raleway"),
       cursorRadius: Radius.circular(kSP25x),
       decoration: InputDecoration(
           hintText: hintText,
@@ -31,7 +33,9 @@ class MessageInputField extends StatelessWidget {
               borderSide: BorderSide(
                 color: Theme.of(context).colorScheme.secondary,
               )),
-          hintStyle: TextStyle(color: Theme.of(context).colorScheme.secondary)),
+          hintStyle: TextStyle(
+              color: Theme.of(context).colorScheme.secondary,
+              fontFamily: "Raleway")),
     );
   }
 }

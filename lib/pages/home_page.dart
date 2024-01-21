@@ -36,7 +36,8 @@ class HomePage extends StatelessWidget {
             style: TextStyle(
                 color: kAppBarComponentColor,
                 fontWeight: FontWeight.bold,
-                fontSize: kFontSize24x),
+                fontSize: kFontSize24x,
+                fontFamily: "Raleway"),
           ),
           toolbarHeight: kSP70x,
           actions: [
@@ -147,7 +148,8 @@ class UserItemView extends StatelessWidget {
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: kFontSize16x,
-                color: kComponentColor),
+                color: kComponentColor,
+                fontFamily: "Raleway"),
           ),
         ],
       ),

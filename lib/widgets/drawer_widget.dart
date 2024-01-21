@@ -83,7 +83,8 @@ class _DrawerItemsViewState extends State<DrawerItemsView> {
                 style: TextStyle(
                     fontSize: kFontSize30x,
                     fontWeight: FontWeight.bold,
-                    color: kComponentColor),
+                    color: kComponentColor,
+                    fontFamily: "Raleway"),
               ),
               Gap(kSP15x),
               GestureDetector(
@@ -119,10 +120,10 @@ class _DrawerItemsViewState extends State<DrawerItemsView> {
           title: Text(
             user?.name ?? '',
             style: TextStyle(
-              fontSize: kFontSize16x,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.secondary,
-            ),
+                fontSize: kFontSize16x,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.secondary,
+                fontFamily: "Raleway"),
           ),
         ),
         Gap(kSP20x),
@@ -134,10 +135,10 @@ class _DrawerItemsViewState extends State<DrawerItemsView> {
           title: Text(
             user?.email ?? '',
             style: TextStyle(
-              fontSize: kFontSize16x,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.secondary,
-            ),
+                fontSize: kFontSize16x,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.secondary,
+                fontFamily: "Raleway"),
           ),
         ),
         Gap(kSP30x),
@@ -179,10 +180,10 @@ class _DrawerItemsViewState extends State<DrawerItemsView> {
           title: Text(
             "Logout",
             style: TextStyle(
-              fontSize: kFontSize16x,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.secondary,
-            ),
+                fontSize: kFontSize16x,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.secondary,
+                fontFamily: "Raleway"),
           ),
           onTap: () {
             _chattingAppHiveModel.removeCurrentUserVO();
@@ -249,16 +250,31 @@ class ChangeAvatarDialog extends StatelessWidget {
                           context.navigateBack();
                           context.navigateBack();
                           context.navigateWithReplacement(NavigatorPage());
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              content: Text(
+                                kUpdateProfileSuccessText,
+                                style: TextStyle(fontFamily: "Raleway"),
+                              ),
+                            ),
+                          );
                         });
                       } else {
                         showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
-                              content: Text("Choose a photo to update")),
+                              content: Text(
+                            "Choose a photo to update",
+                            style: TextStyle(fontFamily: "Raleway"),
+                          )),
                         );
                       }
                     },
-                    child: Text('Update'),
+                    child: Text(
+                      'Update',
+                      style: TextStyle(fontFamily: "Raleway"),
+                    ),
                     style: ButtonStyle(
                         backgroundColor:
                             MaterialStatePropertyAll(kSecondaryColor)),
@@ -271,7 +287,8 @@ class ChangeAvatarDialog extends StatelessWidget {
                   },
                   child: Text(
                     "Cancel",
-                    style: TextStyle(color: kPrimaryColor),
+                    style:
+                        TextStyle(color: kPrimaryColor, fontFamily: "Raleway"),
                   ),
                   style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(kCancelColor)),

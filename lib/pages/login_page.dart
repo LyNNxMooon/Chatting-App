@@ -46,7 +46,8 @@ class LoginPage extends StatelessWidget {
                     style: TextStyle(
                         fontSize: kFontSize20x,
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.secondary),
+                        color: Theme.of(context).colorScheme.secondary,
+                        fontFamily: "Raleway"),
                   ),
                   const Gap(kSP30x),
                   TextFieldWidget(
@@ -62,15 +63,13 @@ class LoginPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton(
-                          onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PasswordResetPage(),
-                              )),
+                          onPressed: () => context
+                              .navigateWithReplacement(PasswordResetPage()),
                           child: Text(
                             "Forgot Password?",
                             style: TextStyle(
-                                color: Theme.of(context).colorScheme.secondary),
+                                color: Theme.of(context).colorScheme.secondary,
+                                fontFamily: "Raleway"),
                           ))
                     ],
                   ),
@@ -104,8 +103,8 @@ class LoginPage extends StatelessWidget {
                       Text(
                         kRegisterNavigationText,
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
+                            color: Theme.of(context).colorScheme.secondary,
+                            fontFamily: "Raleway"),
                       ),
                       const Gap(kSP10x),
                       GestureDetector(
@@ -115,7 +114,8 @@ class LoginPage extends StatelessWidget {
                           "Register",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: kSecondaryColor),
+                              color: kSecondaryColor,
+                              fontFamily: "Raleway"),
                         ),
                       )
                     ],

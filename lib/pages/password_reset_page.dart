@@ -1,5 +1,6 @@
 import 'package:chatting_app/constants/dimension.dart';
 import 'package:chatting_app/constants/strings.dart';
+import 'package:chatting_app/pages/auth_page.dart';
 import 'package:chatting_app/utils/extension.dart';
 import 'package:chatting_app/widgets/button_widget.dart';
 import 'package:chatting_app/widgets/text_field_widget.dart';
@@ -50,7 +51,7 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         elevation: 0,
         leading: GestureDetector(
-          onTap: () => context.navigateBack(),
+          onTap: () => context.navigateWithReplacement(AuthPage()),
           child: Icon(
             Icons.arrow_back_ios,
             color: Theme.of(context).colorScheme.secondary,
@@ -67,7 +68,8 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
                 kPasswordResetTitleText,
                 style: TextStyle(
                     color: Theme.of(context).colorScheme.secondary,
-                    fontSize: kFontSize18x),
+                    fontSize: kFontSize18x,
+                    fontFamily: "Raleway"),
                 textAlign: TextAlign.center,
               ),
               const Gap(kSP30x),
