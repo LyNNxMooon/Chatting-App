@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,10 +25,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -49,6 +43,15 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAp3VTnBrgtUh6_SFoEUoUdfy7pBqRI7sU',
+    appId: '1:921090486288:web:3c80cd0084e9c9a5d09a95',
+    messagingSenderId: '921090486288',
+    projectId: 'chatting-app-59400',
+    authDomain: 'chatting-app-59400.firebaseapp.com',
+    storageBucket: 'chatting-app-59400.appspot.com',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBtA6OlVA6-gZacr8ZpTW-1juI2ecOADWk',
     appId: '1:921090486288:android:e88cd839decc2339d09a95',
@@ -64,5 +67,14 @@ class DefaultFirebaseOptions {
     projectId: 'chatting-app-59400',
     storageBucket: 'chatting-app-59400.appspot.com',
     iosBundleId: 'com.example.chattingApp',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyBCmAHMqnT5YI9SOcBrruHhKIYZUMkLPiA',
+    appId: '1:921090486288:ios:f3e18d9dbf497338d09a95',
+    messagingSenderId: '921090486288',
+    projectId: 'chatting-app-59400',
+    storageBucket: 'chatting-app-59400.appspot.com',
+    iosBundleId: 'com.example.chattingApp.RunnerTests',
   );
 }
