@@ -181,12 +181,14 @@ class MessageInputView extends StatelessWidget {
         Gap(kSP10x),
         IconButton(
             onPressed: () {
-              bloc.otherUserID = otherUserID;
-              bloc.sendingMessage = messageController.text;
-              bloc.otherUserName = otherUserName;
-              bloc.otherUserProfile = otherUserProfile;
-              bloc.sendMessages();
-              messageController.clear();
+              if (messageController.text.isNotEmpty) {
+                bloc.otherUserID = otherUserID;
+                bloc.sendingMessage = messageController.text;
+                bloc.otherUserName = otherUserName;
+                bloc.otherUserProfile = otherUserProfile;
+                bloc.sendMessages();
+                messageController.clear();
+              }
             },
             icon: Icon(
               Icons.send,
